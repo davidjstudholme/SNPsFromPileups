@@ -7,7 +7,8 @@ Burrows-Wheeler Aligner (BWA) mem version 0.7.15-r1140 with default options and 
 Candidate SNVs were identified using Sequence Alignment/Map tools (SAMtools)/binary call format tools (BCFtools) package, version 1.6, using the following command-lines: 
 
 ```
-samtools mpileup -u -f genome.fasta alignment.bam 4 alignment.bcf and.
+samtools mpileup -u -f genome.fasta alignment.bam 4 alignment.bcf
+
 bcftools call -m -v –Ov alignment.bcf 4 alignment.vcf
 ```
 
