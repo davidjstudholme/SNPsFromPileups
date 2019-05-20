@@ -2,7 +2,7 @@
 Script for inferring SNPs from pileup files
 
 
-First, .bam file was generated using Burrows-Wheeler Aligner (BWA) mem version 0.7.15-r1140.
+BAM files were generated using Burrows-Wheeler Aligner (BWA) mem version 0.7.15-r1140.
 
 Candidate SNVs were identified using Sequence Alignment/Map tools (SAMtools)/binary call format tools (BCFtools) package, version 1.6, using the following command-lines: 
 
@@ -26,6 +26,10 @@ Allele frequencies at each SNP site were estimated from frequencies of each base
 
 Thus, we would expect an allele frequency of close to zero or one for homozygous sites and approximately 0.5 for heterozygous sites in a diploid genome.
 
-The binary alignment/map (BAM)-formatted BWA-mem alignments were converted to pileup format using the samtools mpileup command in SAMtools version 1.6. From the resulting pileup files, we used a custom Perl script (included in Supplementary material) to detect SNPs.
+The BAM alignments were converted to pileup format using the samtools mpileup command in SAMtools version 1.6. From the resulting pileup files, we used a custom Perl script (get_snps_from_pileups.pl) to detect SNPs.
 
-For SNP detection, we considered only sites where depth of coverage by aligned reads was at least 5× for all 17 datasets. 
+```
+perl get_snps_from_pileups.pl 10 alignment.filtered.vcf *.pileup > snps.csv
+```
+
+For SNP detection, we considered only sites where depth of coverage by aligned reads was at least 10× for all datasets. 
