@@ -34,16 +34,12 @@ We also need the alignments in SAMtools' mpileup format. The ```SNPsFromPileups.
 To generate the mpileup files (```.pileup```):
 
 ```
-for alignmentFile in *.bam; do samtools mpileup $alignmentFile > $alignmentFile.pileup
+for alignmentFile in *.bam; do samtools mpileup -f genome.fasta $alignmentFile > $alignmentFile.pileup; done
 ```
 
-We will calculate  
-
-
-The BAM alignments were converted to pileup format using the samtools mpileup command in SAMtools version 1.6. From the resulting pileup files, we used a custom Perl script (get_snps_from_pileups.pl) to detect SNPs.
+Now we are ready to generate the table of allele frequencies (considering only sites where read-coverage is at least 10x):
 
 ```
 perl get_snps_from_pileups.pl 10 alignment.filtered.vcf *.pileup > snps.csv
 ```
-
-For SNP detection, we considered only sites where depth of coverage by aligned reads was at least 10× for all datasets. 
+ 
