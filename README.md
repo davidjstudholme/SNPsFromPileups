@@ -1,6 +1,8 @@
 # SNPsFromPileups
 
-The purpose of this script is as part of a simple pipeline for parsing a set of SAMtools mpileup files to identify SNPs and tabulate the allele-frequencies at each SNP across a set of biological samples.
+The purpose of this script is as part of a simple pipeline for parsing a set of
+[SAMtools mpileup](http://samtools.sourceforge.net/pileup.shtml) files to identify SNPs and tabulate
+the allele-frequencies at each SNP across a set of biological samples.
 
 The scenario is that we have performed genomic re-sequencing on a set of several biological samples.
 The genomic sequence reads have been aligned against a reference genome sequence using a tool such as BWA to generate a ```.bam``` file.
