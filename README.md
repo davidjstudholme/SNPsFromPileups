@@ -13,26 +13,32 @@ So, let's assume that we have one ```.bam``` file for each sample (genomic seque
 The first step is to identify candidate SNPs using SAMtools version 1.6 and BCFtools version 1.6: 
 
 ```
-foreach my alignmentFile *.bam; do samtools mpileup -u -f genome.fasta $alignmentFile > $alignmentFile.bcf; done
+for alignmentFile in *.bam; do samtools mpileup -u -f genome.fasta $alignmentFile > $alignmentFile.bcf; done
 
-foreach my alignmentFile *.bam; do bcftools call -m -v -Ov $alignmentFile.bcf > $alignmentFile.vcf
+for alignmentFile in *.bam; do bcftools call -m -v -Ov $alignmentFile.bcf > $alignmentFile.vcf
 
 ```
 
-So, now we have a set of .vcf files containing candidate SNPs. Let's filter these to keep only high-confidence ones:
+So, now we have a set of ```.vcf``` files containing candidate SNPs. Let's again use version 1.6 of BCFtools to filter these to keep only high-confidence ones:
+```
+for alignmentFile in *.bam; do bcftools filter --SnpGap 100 --include '(REF="A" | REF="C" | REF="G" | REF="T") & %QUAL>=35 & MIN(IDV)>=2 & MIN(DP)>=5 & INDEL=0' $alignmentFile.vcf > $alignmentFile.filtered.vcf; done
 ```
 
-~/bcftools-1.6/bcftools filter --SnpGap 100 --include '(REF="A" | REF="C" | REF="G" | REF="T") & %QUAL>=35 & MIN(IDV)>=2 & MIN(DP)>=5 & INDEL=0' alignment.vcf > alignment.filtered.vcf
-```
-
-This filtering step eliminates indels with low-confidence single-nucleotide variant calls.
-
+This ```bcftools filter``` step eliminates indels with low-confidence single-nucleotide variant calls.
 It also eliminates candidate SNVs within 10 base pairs of an indel, since alignment artefacts are relatively common in the close vicinity of indels.
 
-Allele frequencies at each SNP site were estimated from frequencies of each base
-(adenine (A), cytosine (C), guanine (G) or thymine (T)) among the aligned reads.
+Our ```filtered.vcf``` files now contain a catalogue of relatively high-confidence SNPs.
 
-Thus, we would expect an allele frequency of close to zero or one for homozygous sites and approximately 0.5 for heterozygous sites in a diploid genome.
+We also need the alignments in SAMtools' mpileup format. The ```SNPsFromPileups.pl``` script will extract the allele frequencies from these files. These files are potentially very large and parsing every line is potentially slow. Therefore, the ```filtered.vcf``` files are used to reduce the search space. That is, ```SNPsFromPileups.pl``` ignores any genomic positions that are not listed in at least one of the ```filtered.vcf``` files. (Note that we could have used the ```-l``` option in ```samtools mpileup``` if the ```filtered.vcf``` were converted into ```.bed``` format).
+
+To generate the mpileup files (```.pileup```):
+
+```
+for alignmentFile in *.bam; do samtools mpileup $alignmentFile > $alignmentFile.pileup
+```
+
+We will calculate  
+
 
 The BAM alignments were converted to pileup format using the samtools mpileup command in SAMtools version 1.6. From the resulting pileup files, we used a custom Perl script (get_snps_from_pileups.pl) to detect SNPs.
 
