@@ -5,13 +5,14 @@ The purpose of this script is as part of a simple pipeline for parsing a set of
 the allele-frequencies at each SNP across a set of biological samples.
 
 The scenario is that we have performed genomic re-sequencing on a set of several biological samples.
-The genomic sequence reads have been aligned against a reference genome sequence using a tool such as BWA to generate a ```.bam``` file.
+The genomic sequence reads have been aligned against a reference genome sequence using a tool such as [BWA](https://github.com/lh3/bwa) to generate a ```.bam``` file.
 We want to identify single-nucleotide positions in the genome that show variation between samples (i.e. SNPs) and we want to estimate the allele frequencies in each sample at each of those SNP sites.
 * The samples could be individuals, for example each could be an individual plant or animal. If these individuals are diploid, then we expect that the allele frequencies will always be 0, 0.5 or 1. If the individuals are triploid then we would expect 0, 0.33, 0.67, or 1. And so on for other levels of ploidy. There is a discrete set of possible values for allele frequency.
 * Alternatively, the samples could be populations rather than individuals; for example, they could be microbial cultures containing many millions of individuals of various different genotypes. In this case, the allele frequency depends on the relative abundance of each genotype within the population. There is a continuous set of possible values for allele frequency.
 
 So, let's assume that we have one ```.bam``` file for each sample (genomic sequence reads aligned against reference genome ```genome.fasta```).
-The first step is to identify candidate SNPs using SAMtools version 1.6 and BCFtools version 1.6: 
+The first step is to identify candidate SNPs using [SAMtools](http://www.htslib.org/) version 1.6 and
+[BCFtools](https://samtools.github.io/bcftools/bcftools.html) version 1.6: 
 
 ```
 for alignmentFile in *.bam; do samtools mpileup -u -f genome.fasta $alignmentFile > $alignmentFile.bcf; done
