@@ -42,6 +42,6 @@ for alignmentFile in *.bam; do samtools mpileup -f genome.fasta $alignmentFile >
 Now we are ready to generate the table of allele frequencies (considering only sites where read-coverage is at least 10x):
 
 ```
-perl get_snps_from_pileups.pl 10 alignment.filtered.vcf *.pileup > snps.csv
+perl get_snps_from_pileups.pl 10 *.filtered.vcf *.pileup > snps.csv
 ```
  
