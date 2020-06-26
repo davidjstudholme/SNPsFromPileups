@@ -17,7 +17,7 @@ The first step is to identify candidate SNPs using [SAMtools](http://www.htslib.
 ```
 for alignmentFile in *.bam; do samtools mpileup -u -f genome.fasta $alignmentFile > $alignmentFile.bcf; done
 
-for alignmentFile in *.bam; do bcftools call -m -v -Ov $alignmentFile.bcf > $alignmentFile.vcf
+for alignmentFile in *.bam; do bcftools call -m -v -Ov $alignmentFile.bcf > $alignmentFile.vcf; done
 
 ```
 
