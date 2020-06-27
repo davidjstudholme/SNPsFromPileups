@@ -23,7 +23,7 @@ for alignmentFile in *.bam; do bcftools call -m -v -Ov $alignmentFile.bcf > $ali
 
 So, now we have a set of ```.vcf``` files containing candidate SNPs. Let's again use version 1.6 of BCFtools to filter these to keep only high-confidence ones:
 ```
-for alignmentFile in *.bam; do bcftools filter --SnpGap 100 --include '(REF="A" | REF="C" | REF="G" | REF="T") & %QUAL>=35 & MIN(IDV)>=2 & MIN(DP)>=5 & INDEL=0' $alignmentFile.vcf > $alignmentFile.filtered.vcf; done
+for alignmentFile in *.bam; do bcftools filter --SnpGap 100 --include '(REF="A" | REF="C" | REF="G" | REF="T") & %QUAL>=35 & MIN(DP)>=5 & INDEL=0' $alignmentFile.vcf > $alignmentFile.filtered.vcf; done
 ```
 
 This ```bcftools filter``` step eliminates indels with low-confidence single-nucleotide variant calls.
