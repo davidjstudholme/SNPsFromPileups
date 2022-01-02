@@ -2,7 +2,9 @@
 
 use strict;
 use warnings ;
-    
+
+my $required_consensus = 0.95;
+
 my %genome2seq;
 
 my $csv_file = shift or die "Usage: $0 <tab-delimited .csv file>\n" ;
@@ -27,15 +29,31 @@ while (<FILE>) {
     my $pos = shift @fields;
     my $ref = shift @fields;
     my $alt = shift @fields;
-    foreach my $genome (@genomes) {
-	my $alt_freq = shift @fields;
-       	if ($alt_freq < 0.05) {
-	    $genome2seq{$genome} .= $ref;
-	} 
-	elsif ( $alt_freq > 0.95) {
-	    $genome2seq{$genome} .= $alt;
+    
+    ### Are there any ambiguous nucleotides calls (Ns)?
+    my $unambiguous = 1;
+    foreach my $alt_freq (@fields) {
+	if ($alt_freq > $required_consensus or
+	    $alt_freq < (1 - $required_consensus) ) {
+	    ### OK
 	} else {
-	    $genome2seq{$genome} .= 'N';
+	    ### Ambiguity
+	    $unambiguous = 0;
+	}
+    }
+
+    if ($unambiguous) {
+    
+	foreach my $genome (@genomes) {
+	    my $alt_freq = shift @fields;
+	    if ($alt_freq < (1 - $required_consensus) ) {
+		$genome2seq{$genome} .= $ref;
+	    } 
+	    elsif ( $alt_freq > $required_consensus) {
+		$genome2seq{$genome} .= $alt;
+	    } else {
+		$genome2seq{$genome} .= 'N';
+	    }
 	}
     }
     $count_lines++;
@@ -44,20 +62,20 @@ close FILE;
 
 
 ### Write pseudosequences to FastA file
-my $pseudosequence_file = "$csv_file.haplotype-as-fasta.fna";
-open(PSEUDOSEQ, ">$pseudosequence_file ") or die $!;
+my $pseudosequence_fasta_file = "$csv_file.haplotype-as-fasta.fna";
+open(PSEUDOSEQ, ">$pseudosequence_fasta_file ") or die $!;
 foreach my $genome (sort keys %genome2seq) {
     my $pseudoseq = $genome2seq{$genome};
     print PSEUDOSEQ ">$genome\n$pseudoseq\n";
 }
 close PSEUDOSEQ;
-warn "Wrote pseudosequences to file '$pseudosequence_file'\n";
+warn "Wrote pseudosequences to file '$pseudosequence_fasta_file'\n";
     
 ### Write pseudosequences to Nexus file
-my $pseudosequence_file = "$csv_file.haplotype.nex";
+my $pseudosequence_nexus_file = "$csv_file.haplotype.nex";
 my @taxa = sort keys %genome2seq;
 my $taxa_count = scalar(@taxa);
-open(PSEUDOSEQ, ">$pseudosequence_file ") or die $!;
+open(PSEUDOSEQ, ">$pseudosequence_nexus_file ") or die $!;
 print PSEUDOSEQ "#NEXUS\n\n";
 
 ### Print taxa block
@@ -101,5 +119,5 @@ if (0) {
 }
 
 close PSEUDOSEQ;
-warn "Wrote pseudosequences to file '$pseudosequence_file'\n";
+warn "Wrote pseudosequences to file '$pseudosequence_nexus_file'\n";
 
