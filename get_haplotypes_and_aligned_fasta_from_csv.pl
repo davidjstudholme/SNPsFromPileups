@@ -43,7 +43,6 @@ while (<FILE>) {
     }
 
     if ($unambiguous) {
-    
 	foreach my $genome (@genomes) {
 	    my $alt_freq = shift @fields;
 	    if ($alt_freq < (1 - $required_consensus) ) {
@@ -55,8 +54,8 @@ while (<FILE>) {
 		$genome2seq{$genome} .= 'N';
 	    }
 	}
+        $count_lines++;
     }
-    $count_lines++;
 }
 close FILE;
 
