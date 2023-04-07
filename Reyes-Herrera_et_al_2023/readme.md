@@ -59,4 +59,25 @@ for alignmentFile in FAO10428.bam FAO15599.bam FAO28907.bam SRR10054446.bam SRR1
 for alignmentFile in FAO10428 FAO15599 FAO28907 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598;do echo $i samtools mpileup -f GCA_007994515.1_ASM799451v1_genomic.fna $alignmentFile > $i.pileup; done
 ```
 
+## Generate VCF using pilon
+**Walker, B. J., Abeel, T., Shea, T., Priest, M., Abouelliel, A., Sakthikumar, S., Cuomo, C. A., Zeng, Q., Wortman, J., Young, S. K., & Earl, A. M.**
+(2014).
+Pilon: an integrated tool for comprehensive microbial variant detection and genome assembly improvement. 
+*PLoS One*, **9**: e112963.
+https://doi.org/10.1371/journal.pone.0112963.
+```
+for alignmentFile in FAO10428.bam FAO15599.bam FAO28907.bam SRR10054446.bam SRR10054447.bam SRR10054448.bam SRR10054449.bam SRR10054450.bam SRR10103605.bam SRR10125423.bam SRR10747097.bam SRR15514269.bam SRR15514270.bam SRR15514271.bam SRR15514272.bam SRR7226877.bam SRR7226878.bam SRR7226879.bam SRR7226880.bam SRR7226881.bam SRR7226882.bam SRR7226883.bam SRR9733598.bam; do echo $alignmentFile; pilon --genome GCA_007994515.1_ASM799451v1_genomic.fna --bam $alignmentFile --output
+pilon_$alignmentFile --vcf; done
+```
+
+## Filter the VCF files with bcftools
+**Danecek, P., Bonfield, J. K., Liddle, J., Marshall, J., Ohan, V., Pollard, M. O., Whitwham, A., Keane, T., McCarthy, S. A., Davies, R. M., & Li, H.**
+(2021).
+Twelve years of SAMtools and BCFtools.
+*GigaScience* **10**: giab008.
+https://doi.org/10.1093/gigascience/giab008
+
+```
+for alignmentFile in FAO10428.bam FAO15599.bam FAO28907.bam SRR10054446.bam SRR10054447.bam SRR10054448.bam SRR10054449.bam SRR10054450.bam SRR10103605.bam SRR10125423.bam SRR10747097.bam SRR15514269.bam SRR15514270.bam SRR15514271.bam SRR15514272.bam SRR7226877.bam SRR7226878.bam SRR7226879.bam SRR7226880.bam SRR7226881.bam SRR7226882.bam SRR7226883.bam SRR9733598.bam; do echo $alignmentFile; bcftools filter --include '(REF="A" | REF="C" | REF="G" | REF="T") & (ALT="A" | ALT="C" | ALT="G" | ALT="T")' pilon_$alignmentFile.vcf > $alignmentFile.filtered.vcf; done
+```
 
