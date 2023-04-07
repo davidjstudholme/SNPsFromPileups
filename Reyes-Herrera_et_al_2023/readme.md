@@ -59,7 +59,7 @@ for alignmentFile in FAO10428.bam FAO15599.bam FAO28907.bam SRR10054446.bam SRR1
 for alignmentFile in FAO10428 FAO15599 FAO28907 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598;do echo $i samtools mpileup -f GCA_007994515.1_ASM799451v1_genomic.fna $alignmentFile > $i.pileup; done
 ```
 
-## Generate VCF using pilon
+## Generate VCF using Pilon
 **Walker, B. J., Abeel, T., Shea, T., Priest, M., Abouelliel, A., Sakthikumar, S., Cuomo, C. A., Zeng, Q., Wortman, J., Young, S. K., & Earl, A. M.**
 (2014).
 Pilon: an integrated tool for comprehensive microbial variant detection and genome assembly improvement. 
@@ -80,4 +80,50 @@ https://doi.org/10.1093/gigascience/giab008
 ```
 for alignmentFile in FAO10428.bam FAO15599.bam FAO28907.bam SRR10054446.bam SRR10054447.bam SRR10054448.bam SRR10054449.bam SRR10054450.bam SRR10103605.bam SRR10125423.bam SRR10747097.bam SRR15514269.bam SRR15514270.bam SRR15514271.bam SRR15514272.bam SRR7226877.bam SRR7226878.bam SRR7226879.bam SRR7226880.bam SRR7226881.bam SRR7226882.bam SRR7226883.bam SRR9733598.bam; do echo $alignmentFile; bcftools filter --include '(REF="A" | REF="C" | REF="G" | REF="T") & (ALT="A" | ALT="C" | ALT="G" | ALT="T")' pilon_$alignmentFile.vcf > $alignmentFile.filtered.vcf; done
 ```
+
+## Get the SNP-calling scripts from GitHub
+```
+git clone https://github.com/davidjstudholme/SNPsFromPileups.git
+```
+
+## Perform SNP-calling from pileup files.
+```
+perl SNPsFromPileups/get_snps_from_pileups_small_genome.pl 10
+FAO10428.bam.filtered.vcf FAO15599.bam.filtered.vcf FAO28907.bam.filtered.vcf
+SRR10054446.bam.filtered.vcf SRR10054447.bam.filtered.vcf
+SRR10054448.bam.filtered.vcf SRR10054449.bam.filtered.vcf
+SRR10054450.bam.filtered.vcf SRR10103605.bam.filtered.vcf
+SRR10125423.bam.filtered.vcf SRR10747097.bam.filtered.vcf
+SRR15514269.bam.filtered.vcf SRR15514270.bam.filtered.vcf
+SRR15514271.bam.filtered.vcf SRR15514272.bam.filtered.vcf
+SRR7226877.bam.filtered.vcf SRR7226878.bam.filtered.vcf
+SRR7226879.bam.filtered.vcf SRR7226880.bam.filtered.vcf
+SRR7226881.bam.filtered.vcf SRR7226882.bam.filtered.vcf
+SRR7226883.bam.filtered.vcf SRR9733598.bam.filtered.vcf FAO10428.bam.pileup
+FAO15599.bam.pileup FAO28907.bam.pileup SRR10054446.bam.pileup
+SRR10054447.bam.pileup SRR10054448.bam.pileup SRR10054449.bam.pileup
+SRR10054450.bam.pileup SRR10103605.bam.pileup SRR10125423.bam.pileup
+SRR10747097.bam.pileup SRR15514269.bam.pileup SRR15514270.bam.pileup
+SRR15514271.bam.pileup SRR15514272.bam.pileup SRR7226877.bam.pileup
+SRR7226878.bam.pileup SRR7226879.bam.pileup SRR7226880.bam.pileup
+SRR7226881.bam.pileup SRR7226882.bam.pileup SRR7226883.bam.pileup
+SRR9733598.bam.pileup > snps_final.csv
+```
+
+## Convert the SNPs into Nexus format for input into iqtree
+```
+perl SNPsFromPileups/get_haplotypes_and_aligned_fasta_from_csv.pl
+snps_final.csv
+```
+
+## Perform phylogenetic analysis using iqtree
+```
+iqtree -s snps_final.csv.haplotype.nex -m GTR+ASC
+```
+
+## Perform bootstrapping
+```
+iqtree -s snps_final.csv.haplotype.nex.uniqueseq.phy -m TIM2+I+G -bb 1000
+```
+
 
