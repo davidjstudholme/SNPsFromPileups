@@ -24,6 +24,12 @@ fasterq-dump --split-3 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR100544
 ### Download Oxford Nanopore FASTQ files
 ```
 fasterq-dump SRR16568737 SRR16568738 SRR16568739 -p
+
+mv SRR16568737.fq FAO15599.fastq
+
+mv SRR16568738.fq FAO28907.fastq
+
+mv SRR16568739.fq FAO10428.fastq
 ```
 
 ## Trim to remove adaptors and low-quality sequences
