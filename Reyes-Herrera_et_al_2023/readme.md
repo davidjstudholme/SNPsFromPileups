@@ -37,11 +37,13 @@ done
 ```
 ### Nanopore reads
 ```
-./bin/canu -correct -p FAO10428 genomeSize=50m -pacbio FAO10428.fastq
+for i in SRR16568737 SRR16568738 SRR16568739
 
-./bin/canu -correct -p FAO15599 genomeSize=50m -pacbio FAO15599.fastq
+canu -correct -p FAO10428 genomeSize=50m -pacbio SRR16568737.fastq
 
-./bin/canu -correct -p FAO28907 genomeSize=50m -pacbio FAO28907.fastq
+canu -correct -p FAO15599 genomeSize=50m -pacbio SRR16568738.fastq
+
+canu -correct -p FAO28907 genomeSize=50m -pacbio SRR16568739.fastq
 ```
 
 ## Align sequences against against the reference genome to generate indexed BAM files
