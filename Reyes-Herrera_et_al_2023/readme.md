@@ -24,12 +24,6 @@ fasterq-dump --split-3 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR100544
 ### Download Oxford Nanopore FASTQ files
 ```
 fasterq-dump SRR16568737 SRR16568738 SRR16568739 -p
-
-# mv SRR16568737.fq FAO15599.fastq
-
-# mv SRR16568738.fq FAO28907.fastq
-
-# mv SRR16568739.fq FAO10428.fastq
 ```
 
 ## Trim to remove adaptors and low-quality sequences
@@ -60,7 +54,7 @@ for i in SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605
 do echo $i
 bwa mem -t 8 GCA_007994515.1_ASM799451v1_genomic.fna SRR10054446_1_val_1.fq.gz SRR10054446_2_val_2.fq.gz > $i.sam
 samtools view -b $i.sam > $i.bam && rm $i.sam
-samtools sort $i.bam > $i.sorted.bam && rm $i.bam
+samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
 samtools index $i.sorted.bam 
 done
 ```
