@@ -37,8 +37,6 @@ done
 ```
 ### Nanopore reads
 ```
-for i in SRR16568737 SRR16568738 SRR16568739
-
 canu -correct -p FAO10428 genomeSize=50m -pacbio SRR16568737.fastq
 
 canu -correct -p FAO15599 genomeSize=50m -pacbio SRR16568738.fastq
