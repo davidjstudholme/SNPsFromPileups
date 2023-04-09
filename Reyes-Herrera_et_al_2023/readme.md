@@ -40,6 +40,9 @@ https://github.com/wdecoster/chopper
 ```
 for i in  SRR16568737 SRR16568738 SRR16568739; do echo $i 
 chopper -q 10 -l 500 < $i.fastq > $i.chopper.fq
+if [ -s $i.fastq ]; then
+  rm $i.fastq
+fi
 done
 ```
 
@@ -51,7 +54,7 @@ Fast and accurate short read alignment with Burrows-Wheeler transform.
 ```
 for i in SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
 do echo $i
-if ![-s $i.sorted.bam] then
+if ! [ -s $i.sorted.bam ]; then
   bwa mem -t 4 GCA_007994515.1_ASM799451v1_genomic.fna SRR10054446_1_val_1.fq.gz SRR10054446_2_val_2.fq.gz > $i.sam
   samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
   samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
@@ -63,18 +66,27 @@ done
 ```
 for i in SRR16568737 SRR16568738 SRR16568739
 do echo $i
-minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fna $i.chopper.fq > $i.sam
-samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
-samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
-samtools index $i.sorted.bam 
+if ! [ -s $i.sorted.bam ]; then
+  minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fna $i.chopper.fq > $i.sam
+  samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
+  samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
+  samtools index $i.sorted.bam 
+fi
+
+
 done
+
+
+
 ```
 
 ## Generate the pileup files from BAM files
 ```
-for i in  SRR16568737 SRR16568738 SRR16568739 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
+for i in SRR16568737 SRR16568738 SRR16568739 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
 do echo $i 
-samtools mpileup -q 1 -f GCA_007994515.1_ASM799451v1_genomic.fna $i.sorted.bam > $i.pileup
+if ! [ -s $i.pileup ]; then
+  samtools mpileup -q 1 -f GCA_007994515.1_ASM799451v1_genomic.fna $i.sorted.bam > $i.pileup
+fi
 done
 ```
 
