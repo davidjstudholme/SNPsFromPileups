@@ -38,20 +38,9 @@ done
 ### Nanopore reads
 https://github.com/wdecoster/chopper
 ```
-canu -correct -p SRR16568737 genomeSize=50m -nanopore SRR16568737.fastq
-
-canu -correct -p SRR16568738 genomeSize=50m -nanopore SRR16568738.fastq
-
-canu -correct -p SRR16568739 genomeSize=50m -nanopore SRR16568739.fastq
-
-porechop_abi -abi -i SRR16568737.fastq -o SRR16568737.trimmed.fq
-
-chopper -q 30 -l 500 < SRR16568737.fastq > SRR16568737.chopper.fq
-
-
-
-
-
+for i in  SRR16568737 SRR16568738 SRR16568739; do echo $i 
+chopper -q 10 -l 500 < $i.fastq > $i.chopper.fq
+done
 ```
 
 ## Align sequences against against the reference genome to generate indexed BAM files
