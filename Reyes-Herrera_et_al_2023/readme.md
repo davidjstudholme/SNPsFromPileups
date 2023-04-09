@@ -61,7 +61,7 @@ done
 ```
 for i in SRR16568737 SRR16568738 SRR16568739
 do echo $i
-minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fasta $i.chopper.fq > $i.sam
+minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fna $i.chopper.fq > $i.sam
 samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
 samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
 samtools index $i.sorted.bam 
