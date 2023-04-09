@@ -57,22 +57,23 @@ samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
 samtools index $i.sorted.bam 
 done
 ```
-
-## Generate the pileup files from BAM files
+### Nanopore reads
 ```
-for i in FAO10428 FAO15599 FAO28907 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
-do echo $i 
-samtools mpileup -q 1 -f GCA_007994515.1_ASM799451v1_genomic.fna $i.sorted.bam > $i.pileup
+for i in SRR16568737 SRR16568738 SRR16568739
+do echo $i
+minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fasta $i.chopper.fq > $i.sam
+samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
+samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
+samtools index $i.sorted.bam 
 done
 ```
 
-### Nanopore reads
+## Generate the pileup files from BAM files
 ```
-minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fasta FAO10428_trimmed.fastq > FAO10428.sam
-
-minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fasta FAO10428_trimmed.fastq > FAO15599.sam
-
-minimap2 -ax map-ont GCA_007994515.1_ASM799451v1_genomic.fasta FAO10428_trimmed.fastq > FAO28907.sam
+for i in  SRR16568737 SRR16568738 SRR16568739 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
+do echo $i 
+samtools mpileup -q 1 -f GCA_007994515.1_ASM799451v1_genomic.fna $i.sorted.bam > $i.pileup
+done
 ```
 
 ## Generate VCF using Pilon
