@@ -51,10 +51,12 @@ Fast and accurate short read alignment with Burrows-Wheeler transform.
 ```
 for i in SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
 do echo $i
-bwa mem -t 4 GCA_007994515.1_ASM799451v1_genomic.fna SRR10054446_1_val_1.fq.gz SRR10054446_2_val_2.fq.gz > $i.sam
-samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
-samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
-samtools index $i.sorted.bam 
+if ![-s $i.sorted.bam] then
+  bwa mem -t 4 GCA_007994515.1_ASM799451v1_genomic.fna SRR10054446_1_val_1.fq.gz SRR10054446_2_val_2.fq.gz > $i.sam
+  samtools view -h -b -q 1 $i.sam > $i.bam && rm $i.sam
+  samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
+  samtools index $i.sorted.bam 
+fi
 done
 ```
 ### Nanopore reads
