@@ -37,11 +37,11 @@ done
 ```
 ### Nanopore reads
 ```
-canu -correct -p SRR16568737 genomeSize=50m -pacbio SRR16568737.fastq
+canu -correct -p SRR16568737 genomeSize=50m -nanopore SRR16568737.fastq
 
-canu -correct -p SRR16568738 genomeSize=50m -pacbio SRR16568738.fastq
+canu -correct -p SRR16568738 genomeSize=50m -nanopore SRR16568738.fastq
 
-canu -correct -p SRR16568739 genomeSize=50m -pacbio SRR16568739.fastq
+canu -correct -p SRR16568739 genomeSize=50m -nanopore SRR16568739.fastq
 ```
 
 ## Align sequences against against the reference genome to generate indexed BAM files
