@@ -35,7 +35,7 @@ trim_galore -q 30 --paired $i"_1.fastq" $i"_2.fastq" && gzip $i"_1_val_1.fq" SRR
 done   
 ```
 ### Nanopore reads
-https://github.com/wdecoster/chopper
+Using: https://github.com/wdecoster/chopper
 ```
 for i in  SRR16568737 SRR16568738 SRR16568739; do echo $i 
 chopper -q 10 -l 500 < $i.fastq > $i.chopper.fq
@@ -46,8 +46,13 @@ done
 ```
 
 ## Align sequences against against the reference genome to generate indexed BAM files
+Using SAMtools: 
+**Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., Marth, G., Abecasis, G., Durbin, R., & 1000 Genome Project Data Processing Subgroup** (2009). 
+The Sequence Alignment/Map format and SAMtools. 
+*Bioinformatics*, **25** 2078–2079. https://doi.org/10.1093/bioinformatics/btp352.
 ### Illumina reads
-Using BWA: **Li, H., & Durbin, R.** (2009).
+Using BWA:
+**Li, H., & Durbin, R.** (2009).
 Fast and accurate short read alignment with Burrows-Wheeler transform. 
 *Bioinformatics*, **25** 1754–1760. https://doi.org/10.1093/bioinformatics/btp324.
 ```
@@ -62,6 +67,11 @@ fi
 done
 ```
 ### Nanopore reads
+Using Minimap2: 
+**Li H.** (2018). 
+Minimap2: pairwise alignment for nucleotide sequences. 
+*Bioinformatics*, **34**, 3094–3100. 
+https://doi.org/10.1093/bioinformatics/bty191.
 ```
 for i in SRR16568737 SRR16568738 SRR16568739
 do echo $i
@@ -101,8 +111,12 @@ Pilon: an integrated tool for comprehensive microbial variant detection and geno
 *PLoS One*, **9**: e112963.
 https://doi.org/10.1371/journal.pone.0112963.
 ```
-for alignmentFile in FAO10428.bam FAO15599.bam FAO28907.bam SRR10054446.bam SRR10054447.bam SRR10054448.bam SRR10054449.bam SRR10054450.bam SRR10103605.bam SRR10125423.bam SRR10747097.bam SRR15514269.bam SRR15514270.bam SRR15514271.bam SRR15514272.bam SRR7226877.bam SRR7226878.bam SRR7226879.bam SRR7226880.bam SRR7226881.bam SRR7226882.bam SRR7226883.bam SRR9733598.bam; do echo $alignmentFile; pilon --genome GCA_007994515.1_ASM799451v1_genomic.fna --bam $alignmentFile --output
-pilon_$alignmentFile --vcf; done
+for i in SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598 SRR16568737 SRR16568738 SRR16568739
+do echo $i
+if ! [ -e pilon_$i ]; then
+  pilon --genome GCA_007994515.1_ASM799451v1_genomic.fna --bam $i.sorted.bam --output pilon_$i --vcf
+fi
+done
 ```
 
 ## Filter the VCF files with bcftools
