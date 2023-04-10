@@ -72,12 +72,7 @@ if ! [ -s $i.sorted.bam ]; then
   samtools sort $i.bam -o $i.sorted.bam && rm $i.bam
   samtools index $i.sorted.bam 
 fi
-
-
 done
-
-
-
 ```
 
 ## Generate the pileup files from BAM files
@@ -85,7 +80,7 @@ done
 for i in SRR16568737 SRR16568738 SRR16568739 SRR10054446 SRR10054447 SRR10054448 SRR10054449 SRR10054450 SRR10103605 SRR10125423 SRR10747097 SRR15514269 SRR15514270 SRR15514271 SRR15514272 SRR7226877 SRR7226878 SRR7226879 SRR7226880 SRR7226881 SRR7226882 SRR7226883 SRR9733598
 do echo $i 
 if ! [ -s $i.pileup ]; then
-  samtools mpileup -q 1 -f GCA_007994515.1_ASM799451v1_genomic.fna $i.sorted.bam > $i.pileup
+  samtools mpileup -B -q 1 -f GCA_007994515.1_ASM799451v1_genomic.fna $i.sorted.bam > $i.pileup
 fi
 done
 ```
