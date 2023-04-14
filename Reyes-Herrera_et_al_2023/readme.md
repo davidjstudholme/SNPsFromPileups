@@ -149,7 +149,7 @@ git clone https://github.com/davidjstudholme/SNPsFromPileups.git
 
 ## Perform SNP-calling from pileup files.
 ```
-perl SNPsFromPileups/get_snps_from_pileups_small_genome.pl 10 FAO10428.bam.filtered.vcf FAO15599.bam.filtered.vcf FAO28907.bam.filtered.vcf SRR10054446.bam.filtered.vcf SRR10054447.bam.filtered.vcf SRR10054448.bam.filtered.vcf SRR10054449.bam.filtered.vcf SRR10054450.bam.filtered.vcf SRR10103605.bam.filtered.vcf SRR10125423.bam.filtered.vcf SRR10747097.bam.filtered.vcf SRR15514269.bam.filtered.vcf SRR15514270.bam.filtered.vcf SRR15514271.bam.filtered.vcf SRR15514272.bam.filtered.vcf SRR7226877.bam.filtered.vcf SRR7226878.bam.filtered.vcf SRR7226879.bam.filtered.vcf SRR7226880.bam.filtered.vcf SRR7226881.bam.filtered.vcf SRR7226882.bam.filtered.vcf SRR7226883.bam.filtered.vcf SRR9733598.bam.filtered.vcf FAO10428.bam.pileup FAO15599.bam.pileup FAO28907.bam.pileup SRR10054446.bam.pileup SRR10054447.bam.pileup SRR10054448.bam.pileup SRR10054449.bam.pileup SRR10054450.bam.pileup SRR10103605.bam.pileup SRR10125423.bam.pileup SRR10747097.bam.pileup SRR15514269.bam.pileup SRR15514270.bam.pileup SRR15514271.bam.pileup SRR15514272.bam.pileup SRR7226877.bam.pileup SRR7226878.bam.pileup SRR7226879.bam.pileup SRR7226880.bam.pileup SRR7226881.bam.pileup SRR7226882.bam.pileup SRR7226883.bam.pileup SRR9733598.bam.pileup > snps_final.csv
+perl SNPsFromPileups/get_snps_from_pileups_small_genome.pl 10 *.filtered.vcf > snps_final.csv
 ```
 
 ## Convert the SNPs into Nexus format for input into iqtree
