@@ -1,0 +1,177 @@
+IQ-TREE multicore version 2.0.7 for Linux 64-bit built Jan 21 2022
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    studholme-climb-0 (AVX, 31 GB RAM)
+Command: iqtree2 -s snps_final.csv.haplotype.nex -m GTR+ASC
+Seed:    468967 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Sat Apr 15 14:12:44 2023
+Kernel:  AVX - 1 threads (4 CPU cores detected)
+
+HINT: Use -nt option to specify number of threads because your CPU has 4 cores!
+HINT: -nt AUTO will automatically determine the best number of threads to use.
+
+Reading alignment file snps_final.csv.haplotype.nex ... Nexus format detected
+Alignment has 23 sequences with 232 columns, 114 distinct patterns
+99 parsimony-informative, 133 singleton sites, 0 constant sites
+                    Gap/Ambiguity  Composition  p-value
+   1  SRR10054446.pileup    0.00%    passed     27.82%
+   2  SRR10054447.pileup    0.00%    passed     89.11%
+   3  SRR10054448.pileup    0.00%    passed     98.34%
+   4  SRR10054449.pileup    0.00%    passed     88.28%
+   5  SRR10054450.pileup    0.00%    passed     98.27%
+   6  SRR10103605.pileup    0.00%    passed     98.79%
+   7  SRR10125423.pileup    0.00%    passed     98.79%
+   8  SRR10747097.pileup    0.00%    passed     98.79%
+   9  SRR15514269.pileup    0.00%    passed     54.73%
+  10  SRR15514270.pileup    0.00%    passed     54.73%
+  11  SRR15514271.pileup    0.00%    passed     54.73%
+  12  SRR15514272.pileup    0.00%    passed     54.73%
+  13  SRR16568737.pileup    0.00%    passed     98.79%
+  14  SRR16568738.pileup    0.00%    passed     97.33%
+  15  SRR16568739.pileup    0.00%    passed     89.58%
+  16  SRR7226877.pileup     0.00%    passed     39.60%
+  17  SRR7226878.pileup     0.00%    passed     97.58%
+  18  SRR7226879.pileup     0.00%    passed     59.12%
+  19  SRR7226880.pileup     0.00%    passed     99.18%
+  20  SRR7226881.pileup     0.00%    passed     98.34%
+  21  SRR7226882.pileup     0.00%    passed     79.38%
+  22  SRR7226883.pileup     0.00%    passed     92.19%
+  23  SRR9733598.pileup     0.00%    passed     96.39%
+****  TOTAL                 0.00%  0 sequences failed composition chi2 test (p-value<5%; df=3)
+NOTE: SRR7226881.pileup is identical to SRR10054448.pileup but kept for subsequent analysis
+NOTE: SRR10125423.pileup is identical to SRR10103605.pileup but kept for subsequent analysis
+NOTE: SRR15514270.pileup is identical to SRR15514269.pileup but kept for subsequent analysis
+NOTE: 4 identical sequences (see below) will be ignored for subsequent analysis
+NOTE: SRR10747097.pileup (identical to SRR10103605.pileup) is ignored but added at the end
+NOTE: SRR16568737.pileup (identical to SRR10103605.pileup) is ignored but added at the end
+NOTE: SRR15514271.pileup (identical to SRR15514269.pileup) is ignored but added at the end
+NOTE: SRR15514272.pileup (identical to SRR15514269.pileup) is ignored but added at the end
+Alignment was printed to snps_final.csv.haplotype.nex.uniqueseq.phy
+
+For your convenience alignment with unique sequences printed to snps_final.csv.haplotype.nex.uniqueseq.phy
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.001 seconds
+
+NOTE: 0 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -1356.414
+2. Current log-likelihood: -1194.764
+3. Current log-likelihood: -1172.452
+4. Current log-likelihood: -1165.785
+5. Current log-likelihood: -1162.572
+6. Current log-likelihood: -1160.687
+7. Current log-likelihood: -1159.449
+8. Current log-likelihood: -1158.575
+9. Current log-likelihood: -1157.926
+10. Current log-likelihood: -1157.426
+11. Current log-likelihood: -1157.030
+12. Current log-likelihood: -1156.706
+Optimal log-likelihood: -1156.522
+Rate parameters:  A-C: 0.88445  A-G: 5.64245  A-T: 1.26827  C-G: 0.78811  C-T: 4.62500  G-T: 1.00000
+Base frequencies:  A: 0.222  C: 0.304  G: 0.234  T: 0.240
+Parameters optimization took 12 rounds (0.042 sec)
+Computing ML distances based on estimated model parameters... 0.002 sec
+Computing BIONJ tree...
+0.001 seconds
+Log-likelihood of BIONJ tree: -1158.858
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 0.065 second
+Computing log-likelihood of 98 initial trees ... 0.078 seconds
+Current best score: -1156.522
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -1155.296
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 2: -1155.123
+Iteration 10 / LogL: -1157.325 / Time: 0h:0m:0s
+Iteration 20 / LogL: -1157.796 / Time: 0h:0m:1s
+Finish initializing candidate tree set (20)
+Current best tree score: -1155.123 / CPU time: 1.228
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+BETTER TREE FOUND at iteration 22: -1155.121
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 26: -1154.918
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 29: -1154.859
+Iteration 30 / LogL: -1155.163 / Time: 0h:0m:1s (0h:0m:6s left)
+Iteration 40 / LogL: -1154.920 / Time: 0h:0m:2s (0h:0m:5s left)
+Iteration 50 / LogL: -1154.940 / Time: 0h:0m:2s (0h:0m:4s left)
+WARNING: NNI search needs unusual large number of steps (19) to converge!
+Iteration 60 / LogL: -1155.137 / Time: 0h:0m:3s (0h:0m:3s left)
+Iteration 70 / LogL: -1154.939 / Time: 0h:0m:3s (0h:0m:3s left)
+Iteration 80 / LogL: -1155.092 / Time: 0h:0m:4s (0h:0m:2s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 81: -1154.830
+Iteration 90 / LogL: -1154.889 / Time: 0h:0m:4s (0h:0m:4s left)
+Iteration 100 / LogL: -1154.830 / Time: 0h:0m:5s (0h:0m:4s left)
+BETTER TREE FOUND at iteration 105: -1154.827
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 106: -1154.790
+Iteration 110 / LogL: -1154.946 / Time: 0h:0m:5s (0h:0m:4s left)
+BETTER TREE FOUND at iteration 111: -1154.786
+Iteration 120 / LogL: -1155.031 / Time: 0h:0m:5s (0h:0m:4s left)
+WARNING: NNI search needs unusual large number of steps (19) to converge!
+Iteration 130 / LogL: -1155.175 / Time: 0h:0m:6s (0h:0m:3s left)
+Iteration 140 / LogL: -1155.079 / Time: 0h:0m:6s (0h:0m:3s left)
+Iteration 150 / LogL: -1154.934 / Time: 0h:0m:6s (0h:0m:2s left)
+BETTER TREE FOUND at iteration 159: -1154.784
+Iteration 160 / LogL: -1155.185 / Time: 0h:0m:7s (0h:0m:4s left)
+Iteration 170 / LogL: -1155.051 / Time: 0h:0m:7s (0h:0m:4s left)
+Iteration 180 / LogL: -1155.030 / Time: 0h:0m:8s (0h:0m:3s left)
+BETTER TREE FOUND at iteration 185: -1154.782
+Iteration 190 / LogL: -1154.980 / Time: 0h:0m:8s (0h:0m:4s left)
+Iteration 200 / LogL: -1286.387 / Time: 0h:0m:8s (0h:0m:3s left)
+WARNING: NNI search needs unusual large number of steps (19) to converge!
+Iteration 210 / LogL: -1300.884 / Time: 0h:0m:9s (0h:0m:3s left)
+Iteration 220 / LogL: -1287.492 / Time: 0h:0m:9s (0h:0m:2s left)
+Iteration 230 / LogL: -1154.934 / Time: 0h:0m:10s (0h:0m:2s left)
+Iteration 240 / LogL: -1154.829 / Time: 0h:0m:10s (0h:0m:1s left)
+Iteration 250 / LogL: -1154.936 / Time: 0h:0m:10s (0h:0m:1s left)
+Iteration 260 / LogL: -1155.011 / Time: 0h:0m:11s (0h:0m:1s left)
+Iteration 270 / LogL: -1154.865 / Time: 0h:0m:11s (0h:0m:0s left)
+BETTER TREE FOUND at iteration 275: -1154.781
+Iteration 280 / LogL: -1154.930 / Time: 0h:0m:12s (0h:0m:4s left)
+Iteration 290 / LogL: -1155.237 / Time: 0h:0m:12s (0h:0m:3s left)
+Iteration 300 / LogL: -1155.034 / Time: 0h:0m:13s (0h:0m:3s left)
+Iteration 310 / LogL: -1154.799 / Time: 0h:0m:13s (0h:0m:2s left)
+Iteration 320 / LogL: -1154.811 / Time: 0h:0m:13s (0h:0m:2s left)
+Iteration 330 / LogL: -1155.706 / Time: 0h:0m:14s (0h:0m:1s left)
+Iteration 340 / LogL: -1155.361 / Time: 0h:0m:14s (0h:0m:1s left)
+Iteration 350 / LogL: -1154.841 / Time: 0h:0m:15s (0h:0m:1s left)
+Iteration 360 / LogL: -1154.949 / Time: 0h:0m:15s (0h:0m:0s left)
+Iteration 370 / LogL: -1154.886 / Time: 0h:0m:15s (0h:0m:0s left)
+TREE SEARCH COMPLETED AFTER 376 ITERATIONS / Time: 0h:0m:16s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -1154.781
+Optimal log-likelihood: -1154.779
+Rate parameters:  A-C: 0.88603  A-G: 5.63420  A-T: 1.26635  C-G: 0.79027  C-T: 4.62472  G-T: 1.00000
+Base frequencies:  A: 0.222  C: 0.304  G: 0.234  T: 0.240
+Parameters optimization took 1 rounds (0.002 sec)
+BEST SCORE FOUND : -1154.779
+Total tree length: 0.009
+
+Total number of iterations: 376
+CPU time used for tree search: 14.192 sec (0h:0m:14s)
+Wall-clock time used for tree search: 15.999 sec (0h:0m:15s)
+Total CPU time used: 14.291 sec (0h:0m:14s)
+Total wall-clock time used: 16.106 sec (0h:0m:16s)
+
+Analysis results written to: 
+  IQ-TREE report:                snps_final.csv.haplotype.nex.iqtree
+  Maximum-likelihood tree:       snps_final.csv.haplotype.nex.treefile
+  Likelihood distances:          snps_final.csv.haplotype.nex.mldist
+  Screen log file:               snps_final.csv.haplotype.nex.log
+
+Date and Time: Sat Apr 15 14:13:00 2023
