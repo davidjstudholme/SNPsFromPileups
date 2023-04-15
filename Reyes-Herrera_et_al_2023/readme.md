@@ -149,7 +149,7 @@ git clone https://github.com/davidjstudholme/SNPsFromPileups.git
 
 ## Perform SNP-calling from pileup files.
 ```
-perl SNPsFromPileups/get_snps_from_pileups_small_genome.pl 10 *.filtered.vcf > snps_final.csv
+perl SNPsFromPileups/get_snps_from_pileups_small_genome.pl 10 *.filtered.vcf *.pileup > snps_final.csv
 ```
 
 ## Convert the SNPs into Nexus format for input into iqtree
@@ -163,12 +163,10 @@ IQ-TREE: a fast and effective stochastic algorithm for estimating maximum-likeli
 *Molecular Biology and Evolution* **32**: 268–274.
 https://doi.org/10.1093/molbev/msu300.
 ```
-iqtree -s snps_final.csv.haplotype.nex -m GTR+ASC
+iqtree2 -s snps_final.csv.haplotype.nex -m GTR+ASC
 ```
 
 ## Perform bootstrapping
 ```
 iqtree -s snps_final.csv.haplotype.nex.uniqueseq.phy -m TIM2+I+G -bb 1000
 ```
-
-
