@@ -1,4 +1,4 @@
-If you are looking for the code to accompany this paper: **Reyes-Herrera et al. (2023)**. Genome sequence data reveal at least two distinct incursions of the Tropical Race 4 variant of Fusarium wilt into South America. _Phytopathology_ 113: 90–97, then please go to https://github.com/davidjstudholme/fusarium_TR4_genomics.
+Note: If you are looking for the code to accompany this paper: **Reyes-Herrera et al. (2023)**. Genome sequence data reveal at least two distinct incursions of the Tropical Race 4 variant of Fusarium wilt into South America. _Phytopathology_ 113: 90–97, then please go to https://github.com/davidjstudholme/fusarium_TR4_genomics.
 
 # SNPsFromPileups
 
